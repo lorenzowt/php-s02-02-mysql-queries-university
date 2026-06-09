@@ -179,7 +179,7 @@ HAVING COUNT(a.id) > 40;
 
 -- 22. Retorna un llistat que mostri el nom dels graus i la suma del nombre total de crèdits que hi ha per a cada tipus d'assignatura. El resultat ha de tenir tres columnes: nom del grau, tipus d'assignatura i la suma dels crèdits de totes les assignatures que hi ha d'aquest tipus. (grau, tipus, total_creditos)
 SELECT g.nombre AS grau,
-       a.tipo AS tipus,
+       a.tipo AS tipo,
        SUM(a.creditos) AS total_creditos
 FROM grado g
 JOIN asignatura a
@@ -188,7 +188,7 @@ GROUP BY g.nombre, a.tipo;
 
 -- 23. Retorna un llistat que mostri quants alumnes s'han matriculat d'alguna assignatura en cadascun dels cursos escolars. El resultat haurà de mostrar dues columnes, una columna amb l'any d'inici del curs escolar i una altra amb el nombre d'alumnes matriculats. (anyo_inicio, total)
 SELECT c.anyo_inicio,
-       COUNT(a.id_alumno) AS total
+       COUNT(DISTINCT a.id_alumno) AS total
 FROM curso_escolar c
 JOIN alumno_se_matricula_asignatura a
 ON c.id = a.id_curso_escolar
@@ -206,7 +206,7 @@ ON p.id = pro.id_profesor
 LEFT JOIN asignatura a
 ON pro.id_profesor = a.id_profesor
 GROUP BY p.id
-ORDER BY COUNT(a.id) DESC;
+ORDER BY total DESC, p.id ASC;
 
 -- 25. Retorna totes les dades de l'alumne/a més jove. (*)
 SELECT *
