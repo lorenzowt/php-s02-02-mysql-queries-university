@@ -87,6 +87,8 @@ LEFT JOIN profesor pro
 ON p.id = pro.id_profesor
 LEFT JOIN departamento d
 ON pro.id_departamento = d.id;
+WHERE p.tipo = 'profesor'
+ORDER BY d.nombre ASC, p.apellido1 ASC, p.apellido2 ASC, p.nombre ASC;
 
 -- 11. Retorna un llistat amb els professors/es que no estan associats a un departament. (apellido1, apellido2, nombre)
 SELECT p.apellido1, 
@@ -97,7 +99,7 @@ LEFT JOIN profesor pro
 ON p.id = pro.id_profesor
 LEFT JOIN departamento d
 ON pro.id_departamento = d.id
-WHERE d.nombre IS NULL;
+WHERE p.tipo = 'profesor' AND d.nombre IS NULL;
 
 -- 12. Retorna un llistat amb els departaments que no tenen professors/es associats. (nombre)
 SELECT d.nombre
@@ -113,7 +115,7 @@ SELECT p.apellido1,
 FROM persona p
 LEFT JOIN asignatura a
 ON p.id = a.id_profesor
-WHERE a.id IS NULL;
+WHERE p.tipo = 'profesor' AND a.id IS NULL;
 
 
 -- 14. Retorna un llistat amb les assignatures que no tenen un professor/a assignat. (id, nombre)
