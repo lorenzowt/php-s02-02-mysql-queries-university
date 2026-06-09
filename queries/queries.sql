@@ -86,7 +86,8 @@ FROM persona p
 LEFT JOIN profesor pro
 ON p.id = pro.id_profesor
 LEFT JOIN departamento d
-ON pro.id_departamento = d.id;
+ON pro.id_departamento = d.id
+WHERE p.tipo = 'profesor';
 
 -- 11. Retorna un llistat amb els professors/es que no estan associats a un departament. (apellido1, apellido2, nombre)
 SELECT p.apellido1, 
