@@ -55,7 +55,7 @@ WHERE m.id_alumno = (
        
 
 -- 8. Retorna un llistat amb el nom de tots els departaments que tenen professors/es que imparteixen alguna assignatura en el Grau en Enginyeria Informàtica (Pla 2015). (nombre)
-SELECT d.nombre AS nombre
+SELECT DISTINCT d.nombre AS nombre
 FROM departamento d
 JOIN profesor p
 ON d.id = p.id_departamento
@@ -63,26 +63,64 @@ JOIN asignatura a
 ON p.id_profesor = a.id_profesor
 JOIN grado g
 ON g.id = a.id_grado
-WHERE g.nombre = 'Grau en Enginyeria Informàtica (Pla 2015)';
+WHERE g.nombre = 'Grado en Ingeniería Informática (Plan 2015)';
 
 -- 9. Retorna un llistat amb tots els alumnes que s'han matriculat en alguna assignatura durant el curs escolar 2018/2019. (nombre, apellido1, apellido2)
-
+SELECT DISTINCT p.nombre,
+                p.apellido1,
+                p.apellido2
+FROM persona p
+JOIN alumno_se_matricula_asignatura a
+ON p.id = a.id_alumno
+JOIN curso_escolar c
+ON a.id_curso_escolar = c.id
+WHERE c.anyo_inicio = 2018
 
 -- Resol les 6 següents consultes utilitzant les clàusules LEFT JOIN i RIGHT JOIN.
 -- 10. Retorna un llistat amb els noms de tots els professors/es i els departaments que tenen vinculats. El llistat també ha de mostrar aquells professors/es que no tenen cap departament associat. El llistat ha de retornar quatre columnes, nom del departament, primer cognom, segon cognom i nom del professor/a. El resultat estarà ordenat alfabèticament de menor a major pel nom del departament, cognoms i el nom. (departamento, apellido1, apellido2, nombre)
-
+SELECT d.nombre AS departamento, 
+       p.apellido1, 
+       p.apellido2, 
+       p.nombre
+FROM persona p
+LEFT JOIN profesor pro
+ON p.id = pro.id_profesor
+LEFT JOIN departamento d
+ON pro.id_departamento = d.id;
 
 -- 11. Retorna un llistat amb els professors/es que no estan associats a un departament. (apellido1, apellido2, nombre)
-
+SELECT p.apellido1, 
+       p.apellido2, 
+       p.nombre
+FROM persona p
+LEFT JOIN profesor pro
+ON p.id = pro.id_profesor
+LEFT JOIN departamento d
+ON pro.id_departamento = d.id
+WHERE d.nombre IS NULL;
 
 -- 12. Retorna un llistat amb els departaments que no tenen professors/es associats. (nombre)
-
+SELECT d.nombre
+FROM departamento d
+LEFT JOIN profesor p
+ON d.id = p.id_departamento
+WHERE p.id_profesor IS NULL;
 
 -- 13. Retorna un llistat amb els professors/es que no imparteixen cap assignatura. (apellido1, apellido2, nombre)
+SELECT p.apellido1,
+       p.apellido2,
+       p.nombre
+FROM persona p
+LEFT JOIN asignatura a
+ON p.id = a.id_profesor
+WHERE a.id IS NULL;
 
 
 -- 14. Retorna un llistat amb les assignatures que no tenen un professor/a assignat. (id, nombre)
-
+SELECT id,
+       nombre
+FROM asignatura
+WHERE id_profesor IS NULL;
 
 -- 15. Retorna un llistat amb tots els departaments que no han impartit assignatures en cap curs escolar. (nombre)
 
