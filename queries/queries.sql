@@ -1,17 +1,18 @@
 -- 1. Retorna un llistat amb el primer cognom, segon cognom i el nom de tots els/les alumnes. El llistat haurà d'estar ordenat alfabèticament de menor a major pel primer cognom, segon cognom i nom.
 SELECT apellido1, apellido2, nombre
 FROM persona
+WHERE tipo = 'alumno'
 ORDER BY apellido1 ASC, apellido2 ASC, nombre ASC;
 
 -- 2. Esbrina el nom i els dos cognoms dels alumnes que no han donat d'alta el seu número de telèfon en la base de dades. (nombre, apellido1, apellido2)
 SELECT nombre, apellido1, apellido2
 FROM persona
-WHERE telefono IS NULL;
+WHERE tipo = 'alumno' AND telefono IS NULL;
 
 -- 3. Retorna el llistat dels alumnes que van néixer en 1999. (id, nombre, apellido1, apellido2, fecha_nacimiento)
 SELECT id, nombre, apellido1, apellido2, fecha_nacimiento
 FROM persona
-WHERE fecha_nacimiento LIKE '1999%';
+WHERE tipo = 'alumno' AND fecha_nacimiento LIKE '1999%';
 
 
 -- 4. Retorna el llistat de professors/es que no han donat d'alta el seu número de telèfon en la base de dades i a més el seu NIF acaba en K. (nombre, apellido1, apellido2, nif)
@@ -34,6 +35,7 @@ JOIN profesor prof
 ON p.id = prof.id_profesor
 JOIN departamento d
 ON prof.id_departamento = d.id;
+ORDER BY p.apellido1 ASC, p.apellido2 ASC, p.nombre ASC;
 
 
 -- 7. Retorna un llistat amb el nom de les assignatures, any d'inici i any de fi del curs escolar de l'alumne/a amb NIF 26902806M. (nombre, anyo_inicio, anyo_fin)
