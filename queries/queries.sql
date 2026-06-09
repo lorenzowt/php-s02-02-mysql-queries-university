@@ -1,20 +1,39 @@
 -- 1. Retorna un llistat amb el primer cognom, segon cognom i el nom de tots els/les alumnes. El llistat haurà d'estar ordenat alfabèticament de menor a major pel primer cognom, segon cognom i nom.
-
+SELECT apellido1, apellido2, nombre
+FROM persona
+ORDER BY apellido1 ASC, apellido2 ASC, nombre ASC;
 
 -- 2. Esbrina el nom i els dos cognoms dels alumnes que no han donat d'alta el seu número de telèfon en la base de dades. (nombre, apellido1, apellido2)
-
+SELECT nombre, apellido1, apellido2
+FROM persona
+WHERE telefono IS NULL;
 
 -- 3. Retorna el llistat dels alumnes que van néixer en 1999. (id, nombre, apellido1, apellido2, fecha_nacimiento)
-
+SELECT id, nombre, apellido1, apellido2, fecha_nacimiento
+FROM persona
+WHERE fecha_nacimiento LIKE '1999%';
 
 
 -- 4. Retorna el llistat de professors/es que no han donat d'alta el seu número de telèfon en la base de dades i a més el seu NIF acaba en K. (nombre, apellido1, apellido2, nif)
-
+SELECT nombre, apellido1, apellido2, nif
+FROM persona
+WHERE telefono IS NULL AND tipo = 'profesor' AND nif LIKE '%K';
 
 -- 5. Retorna el llistat de les assignatures que s'imparteixen en el primer quadrimestre, en el tercer curs del grau que té l'identificador 7. (id, nombre, cuatrimestre, curso, id_grado)
-
+SELECT id, nombre, cuatrimestre, curso, id_grado
+FROM asignatura
+WHERE curso = 3 AND cuatrimestre = 1 AND id_grado = 7;
 
 -- 6. Retorna un llistat dels professors/es juntament amb el nom del departament al qual estan vinculats. El llistat ha de retornar quatre columnes, primer cognom, segon cognom, nom i nom del departament. El resultat estarà ordenat alfabèticament de menor a major pels cognoms i el nom. (apellido1, apellido2, nombre, departamento)
+SELECT p.apellido1, 
+       p.apellido2, 
+       p.nombre,
+       d.nombre AS departamento
+FROM persona p
+JOIN profesor prof
+ON p.id = prof.id_profesor
+JOIN departamento d
+ON prof.id_departamento = d.id;
 
 
 -- 7. Retorna un llistat amb el nom de les assignatures, any d'inici i any de fi del curs escolar de l'alumne/a amb NIF 26902806M. (nombre, anyo_inicio, anyo_fin)
