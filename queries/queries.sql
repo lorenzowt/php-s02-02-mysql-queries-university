@@ -205,8 +205,9 @@ LEFT JOIN profesor pro
 ON p.id = pro.id_profesor
 LEFT JOIN asignatura a
 ON pro.id_profesor = a.id_profesor
+WHERE p.tipo = 'profesor'
 GROUP BY p.id
-ORDER BY total DESC, p.id ASC;
+ORDER BY total DESC;
 
 -- 25. Retorna totes les dades de l'alumne/a més jove. (*)
 SELECT *
