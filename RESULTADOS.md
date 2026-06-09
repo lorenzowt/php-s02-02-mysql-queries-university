@@ -2,79 +2,71 @@
 
 
 ## 📈 Resumen
-✅ 5 correctas de 8 queries
+✅ 7 correctas de 9 queries
 
 ## ✅ Query 1: Correcto
 
-⏱ Tiempo: 0.36 ms
+⏱ Tiempo: 0.46 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 2: Correcto
 
-⏱ Tiempo: 0.27 ms
+⏱ Tiempo: 0.31 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 3: Correcto
 
-⏱ Tiempo: 0.28 ms
+⏱ Tiempo: 0.30 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 4: Correcto
 
-⏱ Tiempo: 0.28 ms
+⏱ Tiempo: 0.32 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 5: Correcto
 
-⏱ Tiempo: 0.29 ms
+⏱ Tiempo: 0.33 ms
 ✅ Se usó índice(s) en la consulta: id_grado
 
 ---
 
-## ❌ Query 6: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,13 +1,13 @@
- apellido1 | apellido2 | nombre | departamento
--Fahey | Considine | Antonio | Economía y Empresa
-+Ramirez | Gea | Zoe | Informática
- Hamill | Kozey | Manolo | Informática
-+Schmidt | Fisher | David | Matemáticas
- Kohler | Schoen | Alejandro | Matemáticas
- Lemke | Rutherford | Cristina | Economía y Empresa
-+Fahey | Considine | Antonio | Economía y Empresa
-+Spencer | Lakin | Esther | Educación
-+Streich | Hirthe | Carmen | Educación
-+Ruecker | Upton | Guillermo | Educación
- Monahan | Murray | Micaela | Agronomía
--Ramirez | Gea | Zoe | Informática
--Ruecker | Upton | Guillermo | Educación
--Schmidt | Fisher | David | Matemáticas
-+Stiedemann | Morissette | Alfredo | Química y Física
- Schowalter | Muller | Francesca | Química y Física
--Spencer | Lakin | Esther | Educación
--Stiedemann | Morissette | Alfredo | Química y Física
--Streich | Hirthe | Carmen | Educación
-```
+## ✅ Query 6: Correcto
 
-⏱ Tiempo: 0.35 ms
-✅ Se usó índice(s) en la consulta: PRIMARY, PRIMARY,id_departamento
+⏱ Tiempo: 0.40 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, PRIMARY
 
 ---
 
-## ❌ Query 7: Error
-- **Descripción**: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY p.apellido1 ASC, p.apellido2 ASC, p.nombre ASC' at line 1
+## ✅ Query 7: Correcto
 
+⏱ Tiempo: 0.57 ms
+✅ Se usó índice(s) en la consulta: nif, PRIMARY,id_asignatura,id_curso_escolar, PRIMARY
 
-## ❌ Query 8: Error
+---
+
+## ❌ Query 8: Incorrecto
+```diff
+--- 
++++ 
+@@ -1,2 +1 @@
+ nombre
+-Informática
+```
+
+⏱ Tiempo: 0.36 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, id_profesor,id_grado, PRIMARY
+
+---
+
+## ❌ Query 9: Error
 - **Descripción**: 'NoneType' object is not iterable
 
