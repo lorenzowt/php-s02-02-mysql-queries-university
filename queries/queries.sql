@@ -99,7 +99,7 @@ LEFT JOIN profesor pro
 ON p.id = pro.id_profesor
 LEFT JOIN departamento d
 ON pro.id_departamento = d.id
-WHERE d.nombre IS NULL;
+WHERE d.nombre IS NULL AND p.tipo = 'profesor';
 
 -- 12. Retorna un llistat amb els departaments que no tenen professors/es associats. (nombre)
 SELECT d.nombre
