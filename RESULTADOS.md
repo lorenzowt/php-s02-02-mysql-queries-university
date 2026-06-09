@@ -2,82 +2,39 @@
 
 
 ## 📈 Resumen
-✅ 3 correctas de 7 queries
+✅ 5 correctas de 8 queries
 
-## ❌ Query 1: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,13 +1,25 @@
- apellido1 | apellido2 | nombre
- Domínguez | Guerrero | Antonio
-+Fahey | Considine | Antonio
- Gea | Ruiz | Sonia
- Gutiérrez | López | Juan
-+Hamill | Kozey | Manolo
- Heller | Pagac | Pedro
- Herman | Pacocha | Daniel
- Hernández | Martínez | Irene
- Herzog | Tremblay | Ramón
-+Kohler | Schoen | Alejandro
- Koss | Bayer | José
- Lakin | Yundt | Inma
-+Lemke | Rutherford | Cristina
-+Monahan | Murray | Micaela
-+Ramirez | Gea | Zoe
-+Ruecker | Upton | Guillermo
- Saez | Vega | Juan
- Sánchez | Pérez | Salvador
-+Schmidt | Fisher | David
-+Schowalter | Muller | Francesca
-+Spencer | Lakin | Esther
-+Stiedemann | Morissette | Alfredo
-+Streich | Hirthe | Carmen
- Strosin | Turcotte | Ismael
-```
+## ✅ Query 1: Correcto
 
-⏱ Tiempo: 0.40 ms
+⏱ Tiempo: 0.36 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
-## ❌ Query 2: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,3 +1,8 @@
- nombre | apellido1 | apellido2
- Pedro | Heller | Pagac
- Ismael | Strosin | Turcotte
-+Esther | Spencer | Lakin
-+Carmen | Streich | Hirthe
-+Antonio | Fahey | Considine
-+Guillermo | Ruecker | Upton
-+Francesca | Schowalter | Muller
-```
+## ✅ Query 2: Correcto
 
-⏱ Tiempo: 0.30 ms
+⏱ Tiempo: 0.27 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 3: Correcto
 
-⏱ Tiempo: 0.31 ms
+⏱ Tiempo: 0.28 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 4: Correcto
 
-⏱ Tiempo: 0.31 ms
+⏱ Tiempo: 0.28 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 5: Correcto
 
-⏱ Tiempo: 0.33 ms
+⏱ Tiempo: 0.29 ms
 ✅ Se usó índice(s) en la consulta: id_grado
 
 ---
@@ -109,11 +66,15 @@
 -Streich | Hirthe | Carmen | Educación
 ```
 
-⏱ Tiempo: 0.39 ms
+⏱ Tiempo: 0.35 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY, PRIMARY,id_departamento
 
 ---
 
 ## ❌ Query 7: Error
+- **Descripción**: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY p.apellido1 ASC, p.apellido2 ASC, p.nombre ASC' at line 1
+
+
+## ❌ Query 8: Error
 - **Descripción**: 'NoneType' object is not iterable
 
