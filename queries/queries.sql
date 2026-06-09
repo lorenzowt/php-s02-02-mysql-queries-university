@@ -178,23 +178,68 @@ GROUP BY g.nombre
 HAVING COUNT(a.id) > 40;
 
 -- 22. Retorna un llistat que mostri el nom dels graus i la suma del nombre total de crèdits que hi ha per a cada tipus d'assignatura. El resultat ha de tenir tres columnes: nom del grau, tipus d'assignatura i la suma dels crèdits de totes les assignatures que hi ha d'aquest tipus. (grau, tipus, total_creditos)
-SELECT g.nombre AS grau
-       a.tipo AS tipus
+SELECT g.nombre AS grau,
+       a.tipo AS tipus,
        SUM(a.creditos) AS total_creditos
 FROM grado g
 JOIN asignatura a
 ON g.id = a.id_grado
 GROUP BY g.nombre, a.tipo;
 
-
 -- 23. Retorna un llistat que mostri quants alumnes s'han matriculat d'alguna assignatura en cadascun dels cursos escolars. El resultat haurà de mostrar dues columnes, una columna amb l'any d'inici del curs escolar i una altra amb el nombre d'alumnes matriculats. (anyo_inicio, total)
-
+SELECT c.anyo_inicio,
+       COUNT(a.id_alumno) AS total
+FROM curso_escolar c
+JOIN alumno_se_matricula_asignatura a
+ON c.id = a.id_curso_escolar
+GROUP BY c.anyo_inicio;
 
 -- 24. Retorna un llistat amb el nombre d'assignatures que imparteix cada professor/a. El llistat ha de tenir en compte aquells professors/es que no imparteixen cap assignatura. El resultat mostrarà cinc columnes: id, nom, primer cognom, segon cognom i nombre d'assignatures. El resultat estarà ordenat de major a menor pel nombre d'assignatures. (id, nombre, apellido1, apellido2, total)
-
+SELECT p.id,
+       p.nombre,
+       p.apellido1,
+       p.apellido2,
+       COUNT(a.id) AS total
+FROM persona p
+LEFT JOIN profesor pro
+ON p.id = pro.id_profesor
+LEFT JOIN asignatura a
+ON pro.id_profesor = a.id_profesor
+GROUP BY p.id
+ORDER BY COUNT(a.id) DESC;
 
 -- 25. Retorna totes les dades de l'alumne/a més jove. (*)
+SELECT *
+FROM persona
+WHERE tipo = 'alumno'
+ORDER BY fecha_nacimiento DESC
+LIMIT 1;
 
 
 -- 26. Retorna un llistat amb els professors/es que tenen un departament associat i que no imparteixen cap assignatura. (apellido1, apellido2, nombre)
+SELECT p.apellido1,
+       p.apellido2,
+       p.nombre
+FROM persona p
+JOIN profesor pro
+ON p.id = pro.id_profesor
+JOIN departamento d
+ON pro.id_departamento = d.id
+LEFT JOIN asignatura a
+ON pro.id_profesor = a.id_profesor
+WHERE a.id IS NULL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
