@@ -134,12 +134,12 @@ ON p.id_profesor = a.id_profesor
 WHERE a.id IS NULL;
 
 -- 16. Retorna el nombre total d'alumnes que hi ha. (total)
-SELECT COUNT(id)
+SELECT COUNT(id) AS total
 FROM persona
 WHERE tipo = 'alumno';
 
 -- 17. Calcula quants alumnes van néixer en 1999. (total)
-SELECT COUNT(id)
+SELECT COUNT(id) AS total
 FROM persona
 WHERE tipo = 'alumno' AND fecha_nacimiento LIKE '1999%';
 
@@ -166,12 +166,25 @@ FROM grado g
 LEFT JOIN asignatura a
 ON g.id = a.id_grado
 GROUP BY g.nombre
-ORDER BY COUNT(a.id);
+ORDER BY COUNT(a.id) DESC;
 
 -- 21. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun, dels graus que tinguin més de 40 assignatures associades. (grau, total)
-
+SELECT g.nombre AS grau,
+       COUNT(a.id) AS total
+FROM grado g
+LEFT JOIN asignatura a
+ON g.id = a.id_grado
+GROUP BY g.nombre
+HAVING COUNT(a.id) > 40;
 
 -- 22. Retorna un llistat que mostri el nom dels graus i la suma del nombre total de crèdits que hi ha per a cada tipus d'assignatura. El resultat ha de tenir tres columnes: nom del grau, tipus d'assignatura i la suma dels crèdits de totes les assignatures que hi ha d'aquest tipus. (grau, tipus, total_creditos)
+SELECT g.nombre AS grau
+       a.tipo AS tipus
+       SUM(a.creditos) AS total_creditos
+FROM grado g
+JOIN asignatura a
+ON g.id = a.id_grado
+GROUP BY g.nombre, a.tipo;
 
 
 -- 23. Retorna un llistat que mostri quants alumnes s'han matriculat d'alguna assignatura en cadascun dels cursos escolars. El resultat haurà de mostrar dues columnes, una columna amb l'any d'inici del curs escolar i una altra amb el nombre d'alumnes matriculats. (anyo_inicio, total)
